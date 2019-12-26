@@ -1,5 +1,17 @@
 package com.project.rest_bestellung;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RestBestellungApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RestBestellungApplication.class, args);
+    }
+}
+
+/* Test for consuming web service
 import com.project.rest_bestellung.Quote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,4 +45,4 @@ public class RestBestellungApplication {
             log.info(quote.toString());
         };
     }
-}
+} */
