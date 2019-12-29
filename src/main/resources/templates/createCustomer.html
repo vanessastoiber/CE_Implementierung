@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create a new Customer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Kundenkonto anlegen</h1>
+    <form action="/customer/create" method="post">
+    	<p>Vorname: <input type="text" name="firstName"/></p>
+        <p>Nachname: <input type="text" name="lastName"/></p>
+        <p>E-Mail-Adresse: <input type="text" name="emailAddress"/></p>
+        <p>Username: <input type="text" name="username"/></p>
+        <p>Lieferadresse: <input type="text" name="deliveryAddress"/></p>
+        <p>Rechnungsadresse: <input type="text" name="invoiceAddress"/></p>
+        
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</body>
+</html>

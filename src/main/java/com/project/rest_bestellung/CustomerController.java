@@ -5,9 +5,11 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
@@ -28,4 +30,11 @@ public class CustomerController {
         
         return user;
     }
+    
+    @GetMapping("/customer/form")
+    public ModelAndView customerForm() {
+    	return new ModelAndView("createCustomer");
+    }
+
+    
 }
