@@ -1,20 +1,45 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Create a new Customer</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-	<h1>Kundenkonto anlegen</h1>
-    <form action="/customer/create" method="post">
-    	<p>Vorname: <input type="text" name="firstName"/></p>
-        <p>Nachname: <input type="text" name="lastName"/></p>
-        <p>E-Mail-Adresse: <input type="text" name="emailAddress"/></p>
-        <p>Username: <input type="text" name="username"/></p>
-        <p>Lieferadresse: <input type="text" name="deliveryAddress"/></p>
-        <p>Rechnungsadresse: <input type="text" name="invoiceAddress"/></p>
-        
-        <p><input type="submit" value="Submit" /></p>
-    </form>
-</body>
+<html>
+	<head>
+	    <title>Create a new Customer</title>
+	</head>
+    <body>
+    	<h1>Kundenkonto anlegen</h1>
+    	
+        <form action="#" th:action="@{/customer/create}" th:object="${customerForm}" method="post">
+
+            <table>
+                <tr>
+                    <td>Vorname:</td>
+                    <td><input type="text" th:field="*{firstName}" /></td>
+                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
+                </tr>
+                <tr>
+                    <td>Nachname:</td>
+                    <td><input type="text" th:field="*{lastName}" /></td>
+                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</td>
+                </tr>
+                <tr>
+                    <td>E-Mail-Adresse:</td>
+                    <td><input type="text" th:field="*{emailAddress}" /></td>
+                </tr>
+                <tr>
+                    <td>Username:</td>
+                    <td><input type="text" th:field="*{username}" /></td>
+                </tr>
+                <tr>
+                    <td>Lieferadresse:</td>
+                    <td><input type="text" th:field="*{deliveryAddress}" /></td>
+                </tr>
+                <tr>
+                    <td>Rechnungsadresse:</td>
+                    <td><input type="text" th:field="*{invoiceAddress}" /></td>
+                </tr>
+                
+                <tr>
+                    <td><button type="submit">Weiter</button></td>
+                </tr>
+            </table>
+        </form>
+    </body>
 </html>
