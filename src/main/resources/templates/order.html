@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>order</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Bestellung</h1>
+<table>
+    <tr>
+        <td>Lenkertyp:</td>
+        <td th:text="${handlebartype}" />
+    </tr>
+    <tr>
+        <td>Material:</td>
+        <td th:text="${material}" />
+    </tr>
+    <tr>
+        <td>Schaltung:</td>
+        <td th:text="${gearLevel}" />
+    </tr>
+    <tr>
+        <td>Griff:</td>
+        <td th:text="${handle}" />
+    </tr>
+</table>
+</body>
+</html>

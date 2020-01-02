@@ -1,16 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Select a Handlebar Type</title>
+    <title>Select a Handle</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Lenkertyp auswählen</h1>
-<form action="#" th:action="@{/processForm}" th:object="${checklist}" method="post">
+<h1>Griff auswählen</h1>
+<form action="#" th:action="@{/processHandleForm}" th:object="${checklist}" method="post">
     <div th:each="item : ${allItems}">
         <input type="radio" th:field="*{checkedItems}" th:value="${item}" />
         <label th:text="${item}">example</label>
     </div>
+
     <input type="submit" />
 </form>
 </body>
