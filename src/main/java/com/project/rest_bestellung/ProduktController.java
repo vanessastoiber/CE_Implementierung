@@ -8,11 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,13 +59,28 @@ public class ProduktController {
         order.setHandle(checkedItems.get(0));
         System.out.println(order.toString());
         
+        model = postOrder(model);
+        
+        return new ModelAndView("order");
+    }
+    
+    public Model postOrder(Model model)  {  
         model.addAttribute("handlebartype", order.getHandlebartype());
         model.addAttribute("material", order.getMaterial());
         model.addAttribute("gearLevel", order.getGearLevels());
         model.addAttribute("handle", order.getHandle());
-        return new ModelAndView("order");
+        
+        String sendOrderUrl = "https://www.maripavi.at/bestellung" + 
+        		"?lenkertyp=" + order.getHandlebartype() +
+        		"&material=" + order.getMaterial() +
+        		"&schaltung=" + order.getGearLevels() +
+        		"&griff=" + order.getHandle();
+        
+	    ResponseEntity<String> response = restTemplate.postForEntity(sendOrderUrl, "", String.class);
+        model.addAttribute("responseBody", response.getBody());
+        
+        return model;
     }
-    
 
     @RequestMapping("/produkt/lenkertyp")
     public ArrayList getAllHandleBarTypes() {
