@@ -15,7 +15,7 @@ public class CustomerController {
     public String checkCustomerInfo(@Valid User customerForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
         	model.addAttribute("customerForm", customerForm);
-            return "createCustomer";
+            return "/error";
         }
 
         return "redirect:/produkt/lenkertyp";
