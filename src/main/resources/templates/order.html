@@ -24,6 +24,6 @@
         <td th:text="${handle}" />
     </tr>
 </table>
-<p th:text="${responseBody}"/>
+<p th:text="${responseBody} ?: ${error}"/>
 </body>
 </html>
