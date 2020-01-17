@@ -9,32 +9,34 @@
     	
         <form action="#" th:action="@{/customer}" th:object="${customerForm}" method="post">
 
-            <table>
+            <table class="table">
                 <tr>
                     <td>Vorname:</td>
-                    <td><input type="text" th:field="*{firstName}" /></td>
+                    <td><input type="text" th:field="*{firstName}" placeholder="Vorname *" /></td>
                     <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
                 </tr>
                 <tr>
                     <td>Nachname:</td>
-                    <td><input type="text" th:field="*{lastName}" /></td>
+                    <td><input type="text" th:field="*{lastName}" placeholder="Nachname *" /></td>
                     <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</td>
                 </tr>
                 <tr>
                     <td>E-Mail-Adresse:</td>
-                    <td><input type="text" th:field="*{emailAddress}" /></td>
+                    <td><input type="text" th:field="*{emailAddress}" placeholder="Email Adresse *" /></td>
+                    <td th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}">Name Error</td>
                 </tr>
                 <tr>
                     <td>Username:</td>
-                    <td><input type="text" th:field="*{username}" /></td>
+                    <td><input type="text" th:field="*{username}" placeholder="Username" /></td>
                 </tr>
                 <tr>
                     <td>Lieferadresse:</td>
-                    <td><input type="text" th:field="*{deliveryAddress}" /></td>
+                    <td><input type="text" th:field="*{deliveryAddress}" placeholder="Lieferadresse *" /></td>
+                    <td th:if="${#fields.hasErrors('deliveryAddress')}" th:errors="*{deliveryAddress}">Name Error</td>
                 </tr>
                 <tr>
                     <td>Rechnungsadresse:</td>
-                    <td><input type="text" th:field="*{invoiceAddress}" /></td>
+                    <td><input type="text" th:field="*{invoiceAddress}" placeholder="Rechnungsadresse" /></td>
                 </tr>
                 
                 <tr>
