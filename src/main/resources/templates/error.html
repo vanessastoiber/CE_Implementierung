@@ -1,12 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>order</title>
+    <title>Error Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 <h1>Something went wrong! :( </h1>
 <h3>Please check your input and try to register again!</h3>
-<a href="/customer">Try again!</a>
+<a href="/customer" class="btn btn-secondary">Try again!</a>
 </body>
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 </html>

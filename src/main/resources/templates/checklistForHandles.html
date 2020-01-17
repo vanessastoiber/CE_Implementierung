@@ -3,6 +3,7 @@
 <head>
     <title>Select a Handle</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 <h1>Griff auswählen</h1>
@@ -12,7 +13,8 @@
         <label th:text="${item}">example</label>
     </div>
 
-    <input type="submit" />
+    <input type="submit" class="btn btn-secondary" />
 </form>
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 </body>
 </html>

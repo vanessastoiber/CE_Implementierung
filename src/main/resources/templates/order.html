@@ -3,6 +3,7 @@
 <head>
     <title>order</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 <h1>Bestellung</h1>
@@ -25,5 +26,6 @@
     </tr>
 </table>
 <p th:text="${responseBody} ?: ${error}"/>
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html>
 	<head>
 	    <title>Create a new Customer</title>
+        <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 	</head>
     <body>
     	<h1>Kundenkonto anlegen</h1>
@@ -37,9 +38,10 @@
                 </tr>
                 
                 <tr>
-                    <td><button type="submit">Weiter</button></td>
+                    <td><button type="submit" class="btn btn-secondary">Weiter</button></td>
                 </tr>
             </table>
         </form>
+        <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
     </body>
 </html>
