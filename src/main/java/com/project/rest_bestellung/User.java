@@ -1,5 +1,6 @@
 package com.project.rest_bestellung;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -12,10 +13,17 @@ public class User {
     @Size(min=2, max=30)
     private String lastName;
     
-    private Long id;
+    @NotNull
+    @Size(min=5, max=30)
+    @Email
     private String emailAddress;
-    private String username;
+    
+    @NotNull
+    @Size(min=5, max=50)
     private String deliveryAddress;
+    
+    private Long id;
+    private String username;
     private String invoiceAddress;
     
     public Long getId() {
