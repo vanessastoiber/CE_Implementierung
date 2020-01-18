@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
-<body>
+<body class="p-4">
 <h1>Schaltung auswählen</h1>
 <form action="#" th:action="@{/processGearLevelForm}" th:object="${checklist}" method="post">
     <div th:each="item : ${allItems}">

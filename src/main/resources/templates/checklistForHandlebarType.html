@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
-<body>
+<body class="p-4">
 <h1>Lenkertyp auswählen</h1>
 <form action="#" th:action="@{/processForm}" th:object="${checklist}" method="post">
     <div th:each="item : ${allItems}">
@@ -14,6 +14,7 @@
     </div>
     <input type="submit" class="btn btn-secondary" />
 </form>
+<p th:text="${user}" class="font-italic mt-3"/>
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
 </body>
 </html>
