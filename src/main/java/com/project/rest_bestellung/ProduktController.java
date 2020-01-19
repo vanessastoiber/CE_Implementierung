@@ -32,18 +32,91 @@ public class ProduktController {
         this.restTemplate = builder.build();
     }
     
-    @RequestMapping("/produkt/griff")
-    public ArrayList getAllHandles(String url) {
-        final String RESOURCE_URL = "https://www.maripavi.at/produkt/schaltung";
+    public ArrayList getAllOptions(String path) {
+    	String url = "https://www.maripavi.at/produkt/" + path;
         ResponseEntity<ArrayList> response = restTemplate.getForEntity(url, ArrayList.class);
 
         return response.getBody();
     }
     
+    @RequestMapping(value = "/produkt/lenkertyp", method= RequestMethod.GET)
+    public ModelAndView showForm(Model model) {
+    	String path = "lenkertyp";
+        ArrayList result = getAllOptions(path);
+        List<String> allItems = new ArrayList<String>();
+        allItems.add((String) result.get(0));
+        allItems.add((String) result.get(1));
+        allItems.add((String) result.get(2));
+        model.addAttribute("allItems", allItems);
+
+        Checklist checklist = new Checklist();
+        List<String> checkedItems = new ArrayList<String>();
+        // first value will be checked by default.
+        checkedItems.add((String) result.get(0));
+        checklist.setCheckedItems(checkedItems);
+        model.addAttribute("checklist", checklist);
+        return new ModelAndView("checklistForHandlebarType");
+    }
+
+    @RequestMapping(value = "/processForm", method=RequestMethod.POST)
+    public String processForm(@ModelAttribute(value="checklistForHandlebarType") Checklist checklist, Model model) {
+        // Get value of checked item.
+        List<String> checkedItems = checklist.getCheckedItems();
+        order.setHandlebartype(checkedItems.get(0));
+        System.out.println(order.toString());
+        return "redirect:/produkt/material";
+    }
+
+    @RequestMapping(value = "/produkt/material", method= RequestMethod.GET)
+    public ModelAndView showFormMaterial(Model model) {
+    	String path = "material?lenkertyp=" + order.getHandlebartype();
+    	ArrayList result = getAllOptions(path);
+        
+        model.addAttribute("allItems", result);
+        Checklist checklist = new Checklist();
+        List<String> checkedItems = new ArrayList<String>();
+        checkedItems.add((String) result.get(0));
+        checklist.setCheckedItems(checkedItems);
+        model.addAttribute("checklist", checklist);
+        return new ModelAndView("checklistForMaterial");
+    }
+    
+    @RequestMapping(value = "/processMaterialForm", method= RequestMethod.POST)
+    public String processMaterialForm(@ModelAttribute(value="checklistForMaterial") Checklist checklist, Model model) {
+        // Get value of checked item.
+        List<String> checkedItems = checklist.getCheckedItems();
+        order.setMaterial(checkedItems.get(0));
+        System.out.println(order.toString());
+        return "redirect:/produkt/schaltung";
+    }
+    
+    @RequestMapping(value = "/produkt/schaltung", method= RequestMethod.GET)
+    public ModelAndView showFormGearLevel(Model model) {
+    	String path = "schaltung?lenkertyp=" + order.getHandlebartype();
+    	ArrayList result = getAllOptions(path);
+        
+        model.addAttribute("allItems", result);
+        Checklist checklist = new Checklist();
+        List<String> checkedItems = new ArrayList<String>();
+        checkedItems.add((String) result.get(0));
+        checklist.setCheckedItems(checkedItems);
+        model.addAttribute("checklist", checklist);
+        return new ModelAndView("checklistForGearLevels");
+    }
+    
+    @RequestMapping(value = "/processGearLevelForm", method= RequestMethod.POST)
+    public String processGearLevelForm(@ModelAttribute(value="checklistForGearLevels") Checklist checklist, Model model) {
+        // Get value of checked item.
+        List<String> checkedItems = checklist.getCheckedItems();
+        order.setGearLevels(checkedItems.get(0));
+        System.out.println(order.toString());
+        return "redirect:/produkt/griff";
+    }
+    
     @RequestMapping(value = "/produkt/griff", method= RequestMethod.GET)
     public ModelAndView showFormHandles(Model model) {
-    	String url = "https://www.maripavi.at/produkt/griff?material=" + order.getMaterial();
-    	ArrayList result = getAllHandles(url);
+    	String path = "griff?material=" + order.getMaterial();
+    	ArrayList result = getAllOptions(path);
         
         model.addAttribute("allItems", result);
         Checklist checklist = new Checklist();
@@ -58,7 +131,6 @@ public class ProduktController {
     public String processHandleForm(@ModelAttribute(value="checklistForHandle") Checklist checklist, Model model) {
         // Get value of checked item.
         List<String> checkedItems = checklist.getCheckedItems();
-        System.out.println("ausgewählter Griff: " + checkedItems);
         order.setHandle(checkedItems.get(0));
         System.out.println(order.toString());
 
@@ -108,104 +180,5 @@ public class ProduktController {
         }
         
         return new ModelAndView("order");
-    }
-
-    @RequestMapping("/produkt/lenkertyp")
-    public ArrayList getAllHandleBarTypes() {
-        final String RESOURCE_URL = "https://www.maripavi.at/produkt/lenkertyp";
-        ResponseEntity<ArrayList> response = restTemplate.getForEntity(RESOURCE_URL, ArrayList.class);
-
-        return response.getBody();
-    }
-
-    @RequestMapping(value = "/produkt/lenkertyp", method= RequestMethod.GET)
-    public ModelAndView showForm(Model model) {
-        ArrayList result = getAllHandleBarTypes();
-        List<String> allItems = new ArrayList<String>();
-        allItems.add((String) result.get(0));
-        allItems.add((String) result.get(1));
-        allItems.add((String) result.get(2));
-        model.addAttribute("allItems", allItems);
-
-        Checklist checklist = new Checklist();
-        List<String> checkedItems = new ArrayList<String>();
-        // first value will be checked by default.
-        checkedItems.add((String) result.get(0));
-        checklist.setCheckedItems(checkedItems);
-        model.addAttribute("checklist", checklist);
-        return new ModelAndView("checklistForHandlebarType");
-    }
-
-    @RequestMapping(value = "/processForm", method=RequestMethod.POST)
-    public String processForm(@ModelAttribute(value="checklistForHandlebarType") Checklist checklist, Model model) {
-        // Get value of checked item.
-        List<String> checkedItems = checklist.getCheckedItems();
-        order.setHandlebartype(checkedItems.get(0));
-        System.out.println(order.toString());
-        return "redirect:/produkt/material";
-    }
-
-    @RequestMapping("/produkt/material")
-    public ArrayList getAllMaterial(String url) {
-        final String RESOURCE_URL = "https://www.maripavi.at/produkt/material";
-        ResponseEntity<ArrayList> response = restTemplate.getForEntity(url, ArrayList.class);
-
-        return response.getBody();
-    }
-    
-    @RequestMapping(value = "/produkt/material", method= RequestMethod.GET)
-    public ModelAndView showFormMaterial(Model model) {
-    	String url = "https://www.maripavi.at/produkt/material?lenkertyp=" + order.getHandlebartype();
-    	ArrayList result = getAllMaterial(url);
-        
-        model.addAttribute("allItems", result);
-        Checklist checklist = new Checklist();
-        List<String> checkedItems = new ArrayList<String>();
-        checkedItems.add((String) result.get(0));
-        checklist.setCheckedItems(checkedItems);
-        model.addAttribute("checklist", checklist);
-        return new ModelAndView("checklistForMaterial");
-    }
-    
-    @RequestMapping(value = "/processMaterialForm", method= RequestMethod.POST)
-    public String processMaterialForm(@ModelAttribute(value="checklistForMaterial") Checklist checklist, Model model) {
-        // Get value of checked item.
-        List<String> checkedItems = checklist.getCheckedItems();
-        System.out.println("ausgewählter Lenkertyp: " + checkedItems);
-        order.setMaterial(checkedItems.get(0));
-        System.out.println(order.toString());
-        return "redirect:/produkt/schaltung";
-    }
-    
-    @RequestMapping("/produkt/schaltung")
-    public ArrayList getAllGearLevels(String url) {
-        final String RESOURCE_URL = "https://www.maripavi.at/produkt/schaltung";
-        ResponseEntity<ArrayList> response = restTemplate.getForEntity(url, ArrayList.class);
-
-        return response.getBody();
-    }
-    
-    @RequestMapping(value = "/produkt/schaltung", method= RequestMethod.GET)
-    public ModelAndView showFormGearLevel(Model model) {
-    	String url = "https://www.maripavi.at/produkt/schaltung?lenkertyp=" + order.getHandlebartype();
-    	ArrayList result = getAllGearLevels(url);
-        
-        model.addAttribute("allItems", result);
-        Checklist checklist = new Checklist();
-        List<String> checkedItems = new ArrayList<String>();
-        checkedItems.add((String) result.get(0));
-        checklist.setCheckedItems(checkedItems);
-        model.addAttribute("checklist", checklist);
-        return new ModelAndView("checklistForGearLevels");
-    }
-    
-    @RequestMapping(value = "/processGearLevelForm", method= RequestMethod.POST)
-    public String processGearLevelForm(@ModelAttribute(value="checklistForGearLevels") Checklist checklist, Model model) {
-        // Get value of checked item.
-        List<String> checkedItems = checklist.getCheckedItems();
-        System.out.println("ausgewählte Schaltung: " + checkedItems);
-        order.setGearLevels(checkedItems.get(0));
-        System.out.println(order.toString());
-        return "redirect:/produkt/griff";
     }
 }
